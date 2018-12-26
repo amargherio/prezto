@@ -1,3 +1,4 @@
+
 #
 # Defines environment variables.
 #
@@ -9,3 +10,46 @@
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
+# Kubeconfig generation
+KUBEHOME=$HOME/.kube
+KUBECONFIG=""
+for file in $KUBEHOME/{.,}*(N); do
+  if [[ $file != "$KUBEHOME/kubectx" &&
+    $file != "$KUBEHOME/kubens" &&
+    $file != "$KUBEHOME/cache" &&
+    $file != "$KUBEHOME/htt-cache" ]] ; then
+    if [[ $KUBECONFIG == "" ]] then
+      KUBECONFIG=$file
+    else
+      export KUBECONFIG=$KUBECONFIG:$file
+    fi
+  fi
+done
+
+
+export GOPATH=$HOME/Code/Go # GOPATH variable for Go code directory
+export GOBIN=$GOPATH/bin
+export GOROOT=/usr/lib/golang
+export LEIN_HOME=$HOME/bin/leiningen
+export VIRTENV=$HOME/.virtualenv
+export SCALA_HOME=/usr/share/scala
+export M2_HOME=/opt/maven
+export M2=/opt/maven
+export ANDROID_HOME=$HOME/android-sdk
+export NODE_BIN=$HOME/.node_modules/bin
+export JAVA_HOME=/etc/alternatives/java_sdk_1.8.0_openjdk
+export EXERCISM_HOME=$HOME/bin/exercism
+export STACK_BIN=$HOME/.local/bin
+export POSTMAN_BIN=$HOME/bin/postman
+export DOTNET_BIN=$HOME/bin/dotnet
+export FLUTTER_BIN=$HOME/bin/flutter/bin
+export ISTIO_HOME=$HOME/bin/istio/current/bin
+export LOCAL_BIN=$HOME/bin
+
+export GRADLE_HOME=/opt/gradle/current/bin # Only until system package gets updated
+
+# Some Rust/Cargo-specific stuff
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
+
+source $HOME/.zsecrets
