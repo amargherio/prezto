@@ -9,3 +9,38 @@
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
+# KUBECONFIG fanciness for multiple cluster config management
+KUBEHOME=$HOME/.kube
+KUBECONFIG=""
+for file in $KUBEHOME/{.,}*(N); do
+  if [[ $file != "$KUBEHOME/kubectx" && $file != "$KUBEHOME/kubens" &&
+      $file != "$KUBEHOME/cache" && $file != "$KUBEHOME/http-cache" ]] ; then
+    if [[ $KUBECONFIG == "" ]] then
+      KUBECONFIG=$file
+    else
+      export KUBECONFIG=$KUBECONFIG:$file
+    fi
+  fi
+done
+
+export JAVA_HOME=/Library/Java/Home
+export M2_HOME=/usr/local/Cellar/maven/3.5.3/libexec
+export TC_CONFIG_PATH=$HOME/code/goro/pg-config-source
+
+export CARGO_BIN=$HOME/.cargo/bin
+export GOROOT=/usr/local/go
+export GOROOT_BIN=$GOROOT/bin
+export GOPATH=$HOME/code/go
+export GOBIN=$GOPATH/bin
+
+export ISTIO_PATH=$HOME/bin/istio/current
+export ISTIO_BIN=$HOME/bin/istio/current/bin
+export GCLOUD_BIN=$HOME/bin/google-cloud-sdk/bin
+
+export PYTHON_LOCAL_BIN=$HOME/Library/Python/3.6/bin
+
+export LOCAL_BIN=$HOME/bin
+
+source $HOME/.zsecrets
+export VAULT_ADDR="https://vault.toyotaconnected.net"

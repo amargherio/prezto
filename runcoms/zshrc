@@ -11,3 +11,36 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+source $HOME/.zshenv
+source $HOME/.zprezto/docker.zsh
+source $HOME/.zprezto/iterm2_shell_integration.zsh # load in iterm shell integration
+
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+fi
+
+#source /usr/local/etc/bash_completion.d
+source /usr/local/share/zsh/site-functions
+
+PATH=$PATH:$JAVA_HOME
+PATH=$PATH:$M2_HOME
+
+PATH=$PATH:$ISTIO_PATH
+PATH=$PATH:$ISTIO_BIN
+
+PATH=$PATH:$GCLOUD_BIN
+
+PATH=$PATH:$CARGO_BIN
+PATH=$PATH:$GOBIN
+PATH=$PATH:$GOROOT_BIN
+PATH=$PATH:$GOPATH
+
+PATH=$PATH:$PYTHON_LOCAL_BIN
+
+PATH=$PATH:$LOCAL_BIN
+
+export PATH
+
+alias vi=nvim
+alias vim=nvim
+#alias kcep=kubectl get pods -o json | jq '.items[] | select(.status.reason!=null) | select(.status.reason | contains("Evicted")) | "kubectl delete po \(.metadata.name) -n \(.metadata.namespace)"' | xargs -n 1 bash -c
