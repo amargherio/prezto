@@ -178,7 +178,7 @@ zstyle ':prezto:module:prompt' theme 'pure'
 #   'main' \
 #   'brackets' \
 #   'pattern' \
-    'line' \
+#   'line' \
 #   'cursor' \
 #   'root'
 #
