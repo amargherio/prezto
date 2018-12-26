@@ -1,3 +1,4 @@
+
 #
 # Defines environment variables.
 #
@@ -9,3 +10,29 @@
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
+# Kubeconfig generation
+KUBEHOME=$HOME/.kube
+KUBECONFIG=""
+for file in $KUBEHOME/{.,}*(N); do
+  if [[ $file != "$KUBEHOME/kubectx" &&
+    $file != "$KUBEHOME/kubens" &&
+    $file != "$KUBEHOME/cache" &&
+    $file != "$KUBEHOME/http-cache" ]] ; then
+    if [[ $KUBECONFIG == "" ]] then
+      KUBECONFIG=$file
+    else
+      export KUBECONFIG=$KUBECONFIG:$file
+    fi
+  fi
+done
+
+
+#export GOPATH=$HOME/Code/Go # GOPATH variable for Go code directory
+#export GOBIN=$GOPATH/bin
+export GOROOT=/usr/lib/golang
+export VIRTENV=$HOME/.virtualenv
+export DOTNET_BIN=$HOME/bin/dotnet
+export LOCAL_BIN=$HOME/bin
+
+source $HOME/.zsecrets
