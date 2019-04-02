@@ -31,6 +31,7 @@ PATH=$PATH:$GRADLE_HOME
 PATH=$PATH:$DOTNET_BIN
 PATH=$PATH:$FLUTTER_BIN
 PATH=$PATH:$ISTIO_HOME
+PATH=$PATH:$GRAAL_BIN
 PATH=$PATH:$LOCAL_BIN
 
 # Added the cargo binary dir to the front of the path
