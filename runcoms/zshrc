@@ -12,8 +12,6 @@ fi
 
 # Customize to your needs...
 source $HOME/.zshenv
-source $HOME/.zprezto/docker.zsh
-source $HOME/.zprezto/iterm2_shell_integration.zsh # load in iterm shell integration
 
 if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
