@@ -37,10 +37,13 @@ export GOBIN=$GOPATH/bin
 export ISTIO_PATH=$HOME/bin/istio/current
 export ISTIO_BIN=$HOME/bin/istio/current/bin
 export GCLOUD_BIN=$HOME/bin/google-cloud-sdk/bin
+export KREW_BIN=${KREW_ROOT:-$HOME/.krew}/bin
 
 export PYTHON_LOCAL_BIN=$HOME/Library/Python/3.6/bin
 
 export LOCAL_BIN=$HOME/bin
+export ANDROID_HOME=/Users/adam.margherio/Library/Android/sdk
+export FLUTTER_BIN=$LOCAL_BIN/flutter/bin
 
 source $HOME/.zsecrets
 export VAULT_ADDR="https://vault.toyotaconnected.net"

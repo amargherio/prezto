@@ -32,13 +32,32 @@ PATH=$PATH:$CARGO_BIN
 PATH=$PATH:$GOBIN
 PATH=$PATH:$GOROOT_BIN
 PATH=$PATH:$GOPATH
+PATH=$PATH:$KREW_BIN
 
 PATH=$PATH:$PYTHON_LOCAL_BIN
 
 PATH=$PATH:$LOCAL_BIN
+PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+PATH=$PATH:$FLUTTER_BIN
 
 export PATH
+
+gen_random_string () {
+	local val=$(LC_CTYPE=C tr -cd "a-z0-9" < /dev/urandom | tr -dc '[:alnum:]' | fold -w 6 | head -n 1)
+  echo "$val"
+}
+
+troubleshoot_pod () {
+  pod_suffix=$(gen_random_string)
+	pod_name="troubleshooting-amargherio-${pod_suffix}"
+	kubectl run "$pod_name" -i --tty --image="tcartifactory-docker.jfrog.io/ops/ops-toolkit:1.0.0" -n infra --restart=Never --overrides='{ "apiVersion": "v1", "spec": { "imagePullSecrets": [{"name": "artifactory"}] } }' -- bash
+
+  kubectl delete po -n infra "$pod_name"
+}
+
 
 alias vi=nvim
 alias vim=nvim
 #alias kcep=kubectl get pods -o json | jq '.items[] | select(.status.reason!=null) | select(.status.reason | contains("Evicted")) | "kubectl delete po \(.metadata.name) -n \(.metadata.namespace)"' | xargs -n 1 bash -c
+alias ls=exa
+alias grep=rg
