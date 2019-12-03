@@ -31,7 +31,7 @@ export TC_CONFIG_PATH=$HOME/code/goro/pg-config-source
 export CARGO_BIN=$HOME/.cargo/bin
 export GOROOT=/usr/local/go
 export GOROOT_BIN=$GOROOT/bin
-export GOPATH=$HOME/code/go
+export GOPATH=/Users/adam.margherio/code/go
 export GOBIN=$GOPATH/bin
 
 export ISTIO_PATH=$HOME/bin/istio/current
