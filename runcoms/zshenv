@@ -49,6 +49,7 @@ export LOCAL_BIN=$HOME/bin
 export GRADLE_HOME=/opt/gradle/current/bin # Only until system package gets updated
 export GRAAL_BIN=$HOME/bin/graalvm-ce-1.0.0-rc14/bin
 export PROTOBUF_BIN=$LOCAL_BIN/protobuf/bin
+export LINKERD_BIN=$HOME/.linkerd2/bin
 
 # Some Rust/Cargo-specific stuff
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
