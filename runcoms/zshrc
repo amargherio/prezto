@@ -13,6 +13,8 @@ fi
 # Customize to your needs...
 source $HOME/.zshenv
 
+gen_single_kubeconfig()
+
 autoload -Uz compinit
 compinit
 
@@ -44,6 +46,12 @@ PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 PATH=$PATH:$FLUTTER_BIN
 
 export PATH
+
+gen_single_kubeconfig() {
+  cd ~/.kube
+  rm -rf config && touch ./config # this may be damaging to local docker kubernetes config...
+  yq m -a ./config ./{am-tmna-*,am-mnao-*,au-*} >> config
+}
 
 gen_random_string () {
 	local val=$(LC_CTYPE=C tr -cd "a-z0-9" < /dev/urandom | tr -dc '[:alnum:]' | fold -w 6 | head -n 1)
