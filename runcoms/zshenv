@@ -12,17 +12,17 @@ fi
 
 # KUBECONFIG fanciness for multiple cluster config management
 KUBEHOME=$HOME/.kube
-KUBECONFIG=""
-for file in $KUBEHOME/{.,}*(N); do
-  if [[ $file != "$KUBEHOME/kubectx" && $file != "$KUBEHOME/kubens" &&
-      $file != "$KUBEHOME/cache" && $file != "$KUBEHOME/http-cache" ]] ; then
-    if [[ $KUBECONFIG == "" ]] then
-      KUBECONFIG=$file
-    else
-      export KUBECONFIG=$KUBECONFIG:$file
-    fi
-  fi
-done
+# KUBECONFIG=""
+# for file in $KUBEHOME/{.,}*(N); do
+#   if [[ $file != "$KUBEHOME/kubectx" && $file != "$KUBEHOME/kubens" &&
+#       $file != "$KUBEHOME/cache" && $file != "$KUBEHOME/http-cache" ]] ; then
+#     if [[ $KUBECONFIG == "" ]] then
+#       KUBECONFIG=$file
+#     else
+#       export KUBECONFIG=$KUBECONFIG:$file
+#     fi
+#   fi
+# done
 
 export JAVA_HOME=/Library/Java/Home
 export M2_HOME=/usr/local/Cellar/maven/3.5.3/libexec
