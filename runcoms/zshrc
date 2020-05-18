@@ -11,11 +11,12 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+autoload -Uz compinit 
+compinit
+
 source $HOME/.zshenv
 
 gen_single_kubeconfig()
-
-#autoload -Uz compinit
 
 if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
@@ -53,3 +54,5 @@ alias vim=nvim
 #alias kcep=kubectl get pods -o json | jq '.items[] | select(.status.reason!=null) | select(.status.reason | contains("Evicted")) | "kubectl delete po \(.metadata.name) -n \(.metadata.namespace)"' | xargs -n 1 bash -c
 alias ls=exa
 alias grep=rg
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/kustomize kustomize
