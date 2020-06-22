@@ -46,7 +46,7 @@ export ANDROID_HOME=/Users/adam.margherio/Library/Android/sdk
 export FLUTTER_BIN=$LOCAL_BIN/flutter/bin
 
 # export PATH
-path=("$path[@]" "$JAVA_HOME" "$M2_HOME" "$TC_CONFIG_PATH" "$CARGO_BIN" \
+path=("$path[@]" "$HOME/.local/bin" "$JAVA_HOME" "$M2_HOME" "$TC_CONFIG_PATH" "$CARGO_BIN" \
 	"$GOROOT" "$GOROOT_BIN" "$GOPATH" "$GOBIN" \
 	"$ISTIO_PATH" "$ISTIO_BIN" "$GCLOUD_BIN" "$KREW_BIN" \
 	"$PYTHON_LOCAL_BIN" "$LOCAL_BIN" "$ANDROID_HOME" "$FLUTTER_BIN")
