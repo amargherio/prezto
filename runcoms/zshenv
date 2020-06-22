@@ -53,5 +53,8 @@ path=("$path[@]" "$JAVA_HOME" "$M2_HOME" "$TC_CONFIG_PATH" "$CARGO_BIN" \
 typeset -U PATH path
 export PATH
 
+# adding in haskell/ghc/cabal/stack
+source $HOME/.ghcup/env
+
 source $HOME/.zsecrets
 export VAULT_ADDR="https://vault.toyotaconnected.net"
