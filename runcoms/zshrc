@@ -30,7 +30,7 @@ gen_single_kubeconfig() {
 
   cd ~/.kube
   rm -rf config && touch ./config # this may be damaging to local docker kubernetes config...
-  yq m -a ./config ./{am-tmna-*,am-mnao-*,au-*} >> config
+  yq m -a ./config ./{am-tmna-*,am-mnao-*,au-*,cv*} >> config
 
   cd $curr_dir
 }
@@ -43,7 +43,7 @@ gen_random_string () {
 troubleshoot_pod () {
   pod_suffix=$(gen_random_string)
 	pod_name="troubleshooting-amargherio-${pod_suffix}"
-	kubectl run "$pod_name" -i --tty --image="amtmnaacr.azurecr.io/ops/ops-toolkit:1.0.0" -n infra --restart=Never --overrides='{ "apiVersion": "v1", "spec": { "imagePullSecrets": [{"name": "acr"}] } }' -- bash
+	kubectl run "$pod_name" -i --tty --image="amtmnaacr.azurecr.io/ops/ops-toolkit:1.0.1" -n infra --restart=Never --overrides='{ "apiVersion": "v1", "spec": { "imagePullSecrets": [{"name": "acr"}] } }' -- bash
 
   kubectl delete po -n infra "$pod_name"
 }
@@ -52,7 +52,15 @@ troubleshoot_pod () {
 alias vi=nvim
 alias vim=nvim
 #alias kcep=kubectl get pods -o json | jq '.items[] | select(.status.reason!=null) | select(.status.reason | contains("Evicted")) | "kubectl delete po \(.metadata.name) -n \(.metadata.namespace)"' | xargs -n 1 bash -c
-alias ls=exa
+alias ls="exa --group-directories-first"
 alias grep=rg
+
+# AZA alias for all subs...revisit this
+#SUBSCRIPTION_NAMES=$(az account list | jq -r --arg ACCOUNT_FILTER "$AZA_ACCOUNT_FILTER" '.[].name | select(. | contains($ACCOUNT_FILTER))')
+#alias aza='
+#echo "$SUBSCRIPTION_NAMES" | while read subscription; do
+#    az "$@" --subscription "$subscription"    
+#done'
+
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/kustomize kustomize
