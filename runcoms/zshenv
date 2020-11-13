@@ -24,7 +24,7 @@ KUBEHOME=$HOME/.kube
 #   fi
 # done
 
-export JAVA_HOME=/Library/Java/Home
+export JAVA_HOME=$(/usr/libexec/java_home)
 export M2_HOME=/usr/local/Cellar/maven/3.5.3/libexec
 export TC_CONFIG_PATH=$HOME/code/goro/pg-config-source
 
@@ -44,12 +44,15 @@ export PYTHON_LOCAL_BIN=$HOME/Library/Python/3.6/bin
 export LOCAL_BIN=$HOME/bin
 export ANDROID_HOME=/Users/adam.margherio/Library/Android/sdk
 export FLUTTER_BIN=$LOCAL_BIN/flutter/bin
+export DOOM_DIR=$HOME/.doom.d
+export EMACS_BIN=$HOME/.emacs.d/bin
 
 # export PATH
 path=("$path[@]" "$HOME/.local/bin" "$JAVA_HOME" "$M2_HOME" "$TC_CONFIG_PATH" "$CARGO_BIN" \
 	"$GOROOT" "$GOROOT_BIN" "$GOPATH" "$GOBIN" \
 	"$ISTIO_PATH" "$ISTIO_BIN" "$GCLOUD_BIN" "$KREW_BIN" \
-	"$PYTHON_LOCAL_BIN" "$LOCAL_BIN" "$ANDROID_HOME" "$FLUTTER_BIN")
+	"$PYTHON_LOCAL_BIN" "$LOCAL_BIN" "$ANDROID_HOME" "$FLUTTER_BIN" \
+	"$DOOM_DIR" "$EMACS_BIN")
 typeset -U PATH path
 export PATH
 
@@ -58,3 +61,7 @@ source $HOME/.ghcup/env
 
 source $HOME/.zsecrets
 export VAULT_ADDR="https://vault.toyotaconnected.net"
+
+# prompt things
+PURE_PROMPT_SYMBOL=";"
+PURE_PROMPT_VICMD_SYMBOL=":<;"
