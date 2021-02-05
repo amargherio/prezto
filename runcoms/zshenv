@@ -29,7 +29,7 @@ fi
 
 export GOPATH=$HOME/code/go
 export GOBIN=$GOPATH/bin
-export GOROOT=/usr/lib/go
+export GOROOT=/usr/local/go
 export GOROOT_BIN=$GOROOT/bin
 
 export CARGO_BIN=$HOME/.cargo/bin
