@@ -1,3 +1,4 @@
+
 #
 # Defines environment variables.
 #
@@ -9,3 +10,62 @@
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
+# Kubeconfig generation
+#KUBEHOME=$HOME/.kube
+#KUBECONFIG=""
+#for file in $KUBEHOME/{.,}*(N); do
+#  if [[ $file != "$KUBEHOME/kubectx" &&
+#    $file != "$KUBEHOME/kubens" &&
+#    $file != "$KUBEHOME/cache" &&
+#    $file != "$KUBEHOME/http-cache" ]] ; then
+#    if [[ $KUBECONFIG == "" ]] then
+#      KUBECONFIG=$file
+#    else
+#      export KUBECONFIG=$KUBECONFIG:$file
+#    fi
+#  fi
+#done
+
+export GOPATH=$HOME/code/go
+export GOBIN=$GOPATH/bin
+export GOROOT=/usr/lib/go
+export GOROOT_BIN=$GOROOT/bin
+
+export CARGO_BIN=$HOME/.cargo/bin
+
+export KREW_BIN=${KREW_ROOT:-$HOME/.krew}/bin
+
+export DOOM_DIR=$HOME/.doom.d
+export EMACS_BIN=$HOME/.emacs.d/bin
+
+export VIRTENV=$HOME/.virtualenv
+
+export M2_HOME=/opt/maven
+export M2=/opt/maven
+
+export LOCAL_BIN=$HOME/bin
+
+# Some Rust/Cargo-specific stuff
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
+
+source $HOME/.zsecrets
+
+path=(
+	"$path[@]" \
+		"$HOME/.local/bin" \
+		"$GOROOT_BIN" \
+		"$GOROOT" \
+		"$GOBIN" \
+		"$GOPATH" \
+		"$CARGO_BIN" \
+		"$LOCAL_BIN" \
+		"$DOOM_DIR" \
+		"$EMACS_BIN"
+	)
+typeset -U PATH path
+export PATH
+
+# prompt things
+PURE_PROMPT_SYMBOL=";"
+PURE_PROMPT_VICMD_SYMBOL=":<;"

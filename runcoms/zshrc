@@ -11,3 +11,29 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+# enable auto-loading
+autoload -Uz compinit
+compinit
+
+# Source all those sweet envs
+source $HOME/.zshenv
+
+if [ $commands[kubectl] ]; then
+	source <(kubectl completion zsh)
+fi
+
+# random shell funcs
+gen_random_string() {
+	local val=$(LC_ALL=C tr -cd "a-z0-9" < /dev/urandom | tr -dc '[:alnum:]' | fold -w 6 | head -n 1)
+	echo "$val"
+}
+
+# Aliases
+alias vi=nvim
+alias vim=nvim
+alias ls="exa --group-directories-first"
+alias grep=rg
+alias sshp=ssh -o PubKeyAuthentication=no
+
+# try to catch all the random remaining autoloads
+autoload -U +X bashcompinit && bashcompinit
